@@ -24,49 +24,26 @@
         .font-serif-title { font-family: 'Cinzel', serif; }
         .font-script { font-family: 'Great Vibes', cursive; }
 
-        /* Aspect ratio de 1080px x 2340px (1080 / 2340) */
-        .ratio-1080-2340 {
-            aspect-ratio: 1080 / 2340;
-            max-height: 100vh;
-            max-width: 100vw;
-            transform: scale(1.32);
-            transform-origin: center center;
-        }
-
-        /* Snap Scroll Container */
+        /* Contenedor con scroll; cada página se muestra completa */
         .snap-container {
-            scroll-snap-type: y mandatory;
+            scroll-snap-type: y proximity;
             overflow-y: scroll;
             height: 100vh;
             scroll-behavior: smooth;
         }
 
-        .snap-section {
+        .page {
             scroll-snap-align: start;
-            scroll-snap-stop: always;
         }
 
-        /* Página larga: se puede recorrer completa sin que el snap la corte */
-        .snap-section-long {
-            scroll-snap-align: start;
-            scroll-snap-stop: normal;
-        }
-
-        /* ===== Reproductor estilo Apple Music / Spotify (blanco y negro) ===== */
-        .music-player {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            color: #000;
-        }
-
+        /* ===== Reproductor sin fondo (blanco y negro) ===== */
         .player-seek {
             -webkit-appearance: none;
             appearance: none;
             width: 100%;
             height: 4px;
             border-radius: 999px;
-            background: linear-gradient(to right, #000 0%, #000 var(--progress, 0%), #000 var(--progress, 0%), #000 100%);
+            background: #000;
             outline: none;
             cursor: pointer;
         }
@@ -113,107 +90,94 @@
 </head>
 <body class="h-full w-full select-none bg-black text-white">
 
-    <!-- Side Dot Navigation -->
-    <nav class="fixed right-2 sm:right-5 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 sm:gap-3 p-2 bg-black/60 backdrop-blur-md rounded-full border border-amber-500/20 shadow-xl">
-        <button onclick="scrollToSection(0)" class="nav-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400/40 border border-amber-300 transition-all duration-300 hover:scale-125" title="Página 1"></button>
-        <button onclick="scrollToSection(1)" class="nav-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400/40 border border-amber-300 transition-all duration-300 hover:scale-125" title="Página 2 - Música"></button>
-        <button onclick="scrollToSection(2)" class="nav-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400/40 border border-amber-300 transition-all duration-300 hover:scale-125" title="Página 3"></button>
-        <button onclick="scrollToSection(3)" class="nav-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400/40 border border-amber-300 transition-all duration-300 hover:scale-125" title="Página 4"></button>
-        <button onclick="scrollToSection(4)" class="nav-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400/40 border border-amber-300 transition-all duration-300 hover:scale-125" title="Página 5"></button>
-        <button onclick="scrollToSection(5)" class="nav-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400/40 border border-amber-300 transition-all duration-300 hover:scale-125" title="Página 6"></button>
-        <button onclick="scrollToSection(6)" class="nav-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400/40 border border-amber-300 transition-all duration-300 hover:scale-125" title="Página 7"></button>
-        <button onclick="scrollToSection(7)" class="nav-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400/40 border border-amber-300 transition-all duration-300 hover:scale-125" title="Página 8"></button>
-        <button onclick="scrollToSection(8)" class="nav-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400/40 border border-amber-300 transition-all duration-300 hover:scale-125" title="Página 9"></button>
-    </nav>
-
     <!-- Scrollable Container -->
     <main id="scroll-container" class="snap-container">
 
         <!-- PÁGINA 1 -->
-        <section id="section-0" class="snap-section relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+        <section id="section-0" class="page relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black">
             <div class="absolute inset-0 bg-cover bg-center blur-3xl opacity-35 scale-110" style="background-image: url('https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/u.jpg');"></div>
-            <div class="relative z-10 ratio-1080-2340 w-auto h-full max-h-screen flex items-center justify-center shadow-2xl">
-                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/u.jpg" alt="Página 1" class="w-full h-full object-contain pointer-events-none drop-shadow-2xl" />
-            </div>
-            <div class="absolute bottom-4 z-20 text-center text-amber-200/90 text-[11px] animate-bounce pointer-events-none bg-black/60 px-3 py-1.5 rounded-full border border-amber-300/30 backdrop-blur-md shadow-lg">
-                <i class="fa-solid fa-chevron-down text-xs mb-0.5 block"></i>
-                Desliza hacia abajo
+            <div class="relative z-10 w-full max-w-[520px] mx-auto">
+                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/u.jpg" alt="Página 1" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
+
+                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 text-center text-amber-200/90 text-[11px] animate-bounce pointer-events-none bg-black/60 px-3 py-1.5 rounded-full border border-amber-300/30 backdrop-blur-md shadow-lg whitespace-nowrap">
+                    <i class="fa-solid fa-chevron-down text-xs mb-0.5 block"></i>
+                    Desliza hacia abajo
+                </div>
             </div>
         </section>
 
         <!-- PÁGINA 2: REPRODUCTOR DE MÚSICA -->
-        <section id="section-1" class="snap-section relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+        <section id="section-1" class="page relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black">
             <div class="absolute inset-0 bg-cover bg-center blur-3xl opacity-35 scale-110" style="background-image: url('https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(6).jpg');"></div>
-            <div class="relative z-10 ratio-1080-2340 w-auto h-full max-h-screen flex items-center justify-center shadow-2xl">
-                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(6).jpg" alt="Página 2" class="w-full h-full object-contain pointer-events-none drop-shadow-2xl" />
-            </div>
+            <div class="relative z-10 w-full max-w-[520px] mx-auto">
+                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(6).jpg" alt="Página 2" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
 
-            <!-- Reproductor de Música (estilo de la imagen de referencia) -->
-            <div class="absolute z-30 bottom-[60%] left-1/2 -translate-x-1/2 w-[86%] max-w-[300px]">
-                <div class="music-player rounded-2xl px-4 pt-3 pb-3.5 shadow-2xl">
+                <!-- Reproductor de Música (sin fondo, 15% más pequeño) -->
+                <div class="absolute z-30 bottom-[60%] left-1/2 -translate-x-1/2 scale-[0.85] origin-center w-[86%] max-w-[300px]">
+                    <div class="px-4 pt-3 pb-3.5 text-black">
 
-                    <!-- Corazón -->
-                    <div class="flex justify-end">
-                        <button id="like-btn" onclick="toggleLike()" class="ctrl-btn text-lg" aria-label="Me gusta">
-                            <i id="like-icon" class="fa-solid fa-heart"></i>
-                        </button>
-                    </div>
-
-                    <!-- Barra de progreso -->
-                    <div class="mt-2">
-                        <input type="range" id="seek-bar" value="0" min="0" max="100" step="0.1" class="player-seek" aria-label="Progreso de la canción">
-                        <div class="flex justify-between mt-1.5 text-[11px] text-black font-medium">
-                            <span id="current-time">0:00</span>
-                            <span id="remaining-time">-0:00</span>
+                        <!-- Corazón -->
+                        <div class="flex justify-end">
+                            <button id="like-btn" onclick="toggleLike()" class="ctrl-btn text-lg" aria-label="Me gusta">
+                                <i id="like-icon" class="fa-solid fa-heart"></i>
+                            </button>
                         </div>
-                    </div>
 
-                    <!-- Controles -->
-                    <div class="mt-2 flex items-center justify-between px-1">
-                        <button id="shuffle-btn" onclick="toggleShuffle()" class="ctrl-btn is-off text-sm" aria-label="Aleatorio">
-                            <i class="fa-solid fa-shuffle"></i>
-                        </button>
-                        <button onclick="prevTrack()" class="ctrl-btn text-xl" aria-label="Anterior">
-                            <i class="fa-solid fa-backward-step"></i>
-                        </button>
-                        <button id="play-btn" onclick="togglePlay()" class="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center shadow-md transition-transform active:scale-95" aria-label="Reproducir">
-                            <i id="play-icon" class="fa-solid fa-play text-xl ml-1"></i>
-                        </button>
-                        <button onclick="nextTrack()" class="ctrl-btn text-xl" aria-label="Siguiente">
-                            <i class="fa-solid fa-forward-step"></i>
-                        </button>
-                        <button id="repeat-btn" onclick="toggleRepeat()" class="ctrl-btn text-sm" aria-label="Repetir">
-                            <i class="fa-solid fa-repeat"></i>
-                        </button>
-                    </div>
+                        <!-- Barra de progreso -->
+                        <div class="mt-2">
+                            <input type="range" id="seek-bar" value="0" min="0" max="100" step="0.1" class="player-seek" aria-label="Progreso de la canción">
+                            <div class="flex justify-between mt-1.5 text-[11px] text-black font-medium">
+                                <span id="current-time">0:00</span>
+                                <span id="remaining-time">-0:00</span>
+                            </div>
+                        </div>
 
-                    <audio id="bg-audio" loop preload="metadata">
-                        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-wedding-115309.mp3" type="audio/mpeg">
-                    </audio>
+                        <!-- Controles -->
+                        <div class="mt-2 flex items-center justify-between px-1">
+                            <button id="shuffle-btn" onclick="toggleShuffle()" class="ctrl-btn is-off text-sm" aria-label="Aleatorio">
+                                <i class="fa-solid fa-shuffle"></i>
+                            </button>
+                            <button onclick="prevTrack()" class="ctrl-btn text-xl" aria-label="Anterior">
+                                <i class="fa-solid fa-backward-step"></i>
+                            </button>
+                            <button id="play-btn" onclick="togglePlay()" class="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center transition-transform active:scale-95" aria-label="Reproducir">
+                                <i id="play-icon" class="fa-solid fa-play text-xl ml-1"></i>
+                            </button>
+                            <button onclick="nextTrack()" class="ctrl-btn text-xl" aria-label="Siguiente">
+                                <i class="fa-solid fa-forward-step"></i>
+                            </button>
+                            <button id="repeat-btn" onclick="toggleRepeat()" class="ctrl-btn text-sm" aria-label="Repetir">
+                                <i class="fa-solid fa-repeat"></i>
+                            </button>
+                        </div>
+
+                        <audio id="bg-audio" loop preload="metadata">
+                            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-wedding-115309.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- PÁGINA 3 -->
-        <section id="section-2" class="snap-section relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+        <section id="section-2" class="page relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black">
             <div class="absolute inset-0 bg-cover bg-center blur-3xl opacity-35 scale-110" style="background-image: url('https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).jpg');"></div>
-            <div class="relative z-10 ratio-1080-2340 w-auto h-full max-h-screen flex items-center justify-center shadow-2xl">
-                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).jpg" alt="Página 3" class="w-full h-full object-contain pointer-events-none drop-shadow-2xl" />
+            <div class="relative z-10 w-full max-w-[520px] mx-auto">
+                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).jpg" alt="Página 3" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
             </div>
         </section>
 
         <!-- PÁGINA 4 -->
-        <section id="section-3" class="snap-section relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+        <section id="section-3" class="page relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black">
             <div class="absolute inset-0 bg-cover bg-center blur-3xl opacity-35 scale-110" style="background-image: url('https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/4.jpg');"></div>
-            <div class="relative z-10 ratio-1080-2340 w-auto h-full max-h-screen flex items-center justify-center shadow-2xl">
-                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/4.jpg" alt="Página 4" class="w-full h-full object-contain pointer-events-none drop-shadow-2xl" />
+            <div class="relative z-10 w-full max-w-[520px] mx-auto">
+                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/4.jpg" alt="Página 4" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
             </div>
         </section>
 
-        <!-- PÁGINA 5 (LARGA: la imagen se muestra completa, a lo ancho, y se recorre deslizando) -->
-        <section id="section-4" class="snap-section-long relative w-full min-h-screen flex justify-center overflow-hidden bg-black">
+        <!-- PÁGINA 5 -->
+        <section id="section-4" class="page relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black">
             <div class="absolute inset-0 bg-cover bg-center blur-3xl opacity-35 scale-110" style="background-image: url('https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(4).jpg');"></div>
-
             <div class="relative z-10 w-full max-w-[520px] mx-auto">
                 <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(4).jpg" alt="Página 5" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
 
@@ -232,57 +196,57 @@
         </section>
 
         <!-- PÁGINA 6 -->
-        <section id="section-5" class="snap-section relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+        <section id="section-5" class="page relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black">
             <div class="absolute inset-0 bg-cover bg-center blur-3xl opacity-35 scale-110" style="background-image: url('https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(5).jpg');"></div>
-            <div class="relative z-10 ratio-1080-2340 w-auto h-full max-h-screen flex items-center justify-center shadow-2xl">
-                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(5).jpg" alt="Página 6" class="w-full h-full object-contain pointer-events-none drop-shadow-2xl" />
+            <div class="relative z-10 w-full max-w-[520px] mx-auto">
+                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(5).jpg" alt="Página 6" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
             </div>
         </section>
 
         <!-- PÁGINA 7 -->
-        <section id="section-6" class="snap-section relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+        <section id="section-6" class="page relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black">
             <div class="absolute inset-0 bg-cover bg-center blur-3xl opacity-35 scale-110" style="background-image: url('https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(6).jpg');"></div>
-            <div class="relative z-10 ratio-1080-2340 w-auto h-full max-h-screen flex items-center justify-center shadow-2xl">
-                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(6).jpg" alt="Página 7" class="w-full h-full object-contain pointer-events-none drop-shadow-2xl" />
+            <div class="relative z-10 w-full max-w-[520px] mx-auto">
+                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(6).jpg" alt="Página 7" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
             </div>
         </section>
 
         <!-- PÁGINA 8 -->
-        <section id="section-7" class="snap-section relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+        <section id="section-7" class="page relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black">
             <div class="absolute inset-0 bg-cover bg-center blur-3xl opacity-35 scale-110" style="background-image: url('https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(7).jpg');"></div>
-            <div class="relative z-10 ratio-1080-2340 w-auto h-full max-h-screen flex items-center justify-center shadow-2xl">
-                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(7).jpg" alt="Página 8" class="w-full h-full object-contain pointer-events-none drop-shadow-2xl" />
+            <div class="relative z-10 w-full max-w-[520px] mx-auto">
+                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(7).jpg" alt="Página 8" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
             </div>
         </section>
 
         <!-- PÁGINA 9 -->
-        <section id="section-8" class="snap-section relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+        <section id="section-8" class="page relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black">
             <div class="absolute inset-0 bg-cover bg-center blur-3xl opacity-35 scale-110" style="background-image: url('https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(8).jpg');"></div>
-            <div class="relative z-10 ratio-1080-2340 w-auto h-full max-h-screen flex items-center justify-center shadow-2xl">
-                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(8).jpg" alt="Página 9" class="w-full h-full object-contain pointer-events-none drop-shadow-2xl" />
-            </div>
+            <div class="relative z-10 w-full max-w-[520px] mx-auto">
+                <img src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Agregar%20algo%20de%20texto%20(8).jpg" alt="Página 9" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
 
-            <!-- Cuenta Regresiva al 24 de Octubre a las 5:00 PM -->
-            <div class="absolute z-30 bottom-12 left-1/2 -translate-x-1/2 text-white text-center">
-                <div id="countdown" class="flex gap-3 text-white font-mono bg-black/50 backdrop-blur-md px-5 py-2.5 rounded-2xl border border-white/20 shadow-2xl">
-                    <div class="flex flex-col items-center">
-                        <span id="cd-days" class="text-xl font-bold">00</span>
-                        <span class="text-[9px] uppercase tracking-wider text-white/70">Días</span>
-                    </div>
-                    <span class="text-xl font-bold text-white/50">:</span>
-                    <div class="flex flex-col items-center">
-                        <span id="cd-hours" class="text-xl font-bold">00</span>
-                        <span class="text-[9px] uppercase tracking-wider text-white/70">Horas</span>
-                    </div>
-                    <span class="text-xl font-bold text-white/50">:</span>
-                    <div class="flex flex-col items-center">
-                        <span id="cd-mins" class="text-xl font-bold">00</span>
-                        <span class="text-[9px] uppercase tracking-wider text-white/70">Min</span>
-                    </div>
-                    <span class="text-xl font-bold text-white/50">:</span>
-                    <div class="flex flex-col items-center">
-                        <span id="cd-secs" class="text-xl font-bold">00</span>
-                        <span class="text-[9px] uppercase tracking-wider text-white/70">Seg</span>
+                <!-- Cuenta Regresiva al 24 de Octubre a las 5:00 PM -->
+                <div class="absolute z-30 bottom-12 left-1/2 -translate-x-1/2 text-white text-center">
+                    <div id="countdown" class="flex gap-3 text-white font-mono bg-black/50 backdrop-blur-md px-5 py-2.5 rounded-2xl border border-white/20 shadow-2xl">
+                        <div class="flex flex-col items-center">
+                            <span id="cd-days" class="text-xl font-bold">00</span>
+                            <span class="text-[9px] uppercase tracking-wider text-white/70">Días</span>
+                        </div>
+                        <span class="text-xl font-bold text-white/50">:</span>
+                        <div class="flex flex-col items-center">
+                            <span id="cd-hours" class="text-xl font-bold">00</span>
+                            <span class="text-[9px] uppercase tracking-wider text-white/70">Horas</span>
+                        </div>
+                        <span class="text-xl font-bold text-white/50">:</span>
+                        <div class="flex flex-col items-center">
+                            <span id="cd-mins" class="text-xl font-bold">00</span>
+                            <span class="text-[9px] uppercase tracking-wider text-white/70">Min</span>
+                        </div>
+                        <span class="text-xl font-bold text-white/50">:</span>
+                        <div class="flex flex-col items-center">
+                            <span id="cd-secs" class="text-xl font-bold">00</span>
+                            <span class="text-[9px] uppercase tracking-wider text-white/70">Seg</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -291,37 +255,6 @@
     </main>
 
     <script>
-        // ===== Navegación =====
-        const scrollContainer = document.getElementById('scroll-container');
-        const dots = document.querySelectorAll('.nav-dot');
-        const sections = document.querySelectorAll('#scroll-container > section');
-
-        function scrollToSection(index) {
-            const section = document.getElementById(`section-${index}`);
-            if (section) section.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Detecta la sección activa por su posición real (la página 5 es más alta)
-        function updateActiveDot() {
-            const middle = scrollContainer.scrollTop + window.innerHeight / 2;
-            let currentIndex = 0;
-            sections.forEach((sec, idx) => {
-                if (sec.offsetTop <= middle) currentIndex = idx;
-            });
-            dots.forEach((dot, idx) => {
-                if (idx === currentIndex) {
-                    dot.classList.add('bg-amber-400', 'scale-125');
-                    dot.classList.remove('bg-amber-400/40');
-                } else {
-                    dot.classList.remove('bg-amber-400', 'scale-125');
-                    dot.classList.add('bg-amber-400/40');
-                }
-            });
-        }
-
-        scrollContainer.addEventListener('scroll', updateActiveDot);
-        updateActiveDot();
-
         // ===== Reproductor de música =====
         const audio = document.getElementById('bg-audio');
         const playBtn = document.getElementById('play-btn');
@@ -392,7 +325,6 @@
             const current = audio.currentTime || 0;
             const progress = duration ? (current / duration) * 100 : 0;
             seekBar.value = progress;
-            seekBar.style.setProperty('--progress', progress + '%');
             currentTimeEl.textContent = formatTime(current);
             remainingTimeEl.textContent = '-' + formatTime(Math.max(0, duration - current));
         }
