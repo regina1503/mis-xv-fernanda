@@ -165,8 +165,9 @@
                             </button>
                         </div>
 
-                        <audio id="bg-audio" loop preload="metadata">
-                            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-wedding-115309.mp3" type="audio/mpeg">
+                        <audio id="bg-audio" preload="metadata">
+                            <source src="https://cdn.jsdelivr.net/gh/regina1503/mis-xv-fernanda@main/Sasha%20Alex%20Sloan%20-%20Dancing%20With%20Your%20Ghost%20(Lyric%20Video).mp3" type="audio/mpeg">
+                            <source src="https://raw.githubusercontent.com/regina1503/mis-xv-fernanda/main/Sasha%20Alex%20Sloan%20-%20Dancing%20With%20Your%20Ghost%20(Lyric%20Video).mp3" type="audio/mpeg">
                         </audio>
                     </div>
                 </div>
@@ -299,6 +300,7 @@
 
         function togglePlay() {
             if (audio.paused) {
+                if (!startApplied && audio.duration) { startApplied = true; goToStart(); }
                 audio.play().catch(() => {});
             } else {
                 audio.pause();
@@ -308,14 +310,43 @@
         audio.addEventListener('play', () => setPlayingUI(true));
         audio.addEventListener('pause', () => setPlayingUI(false));
 
-        // Anterior: vuelve al inicio de la canción
-        function prevTrack() {
-            audio.currentTime = 0;
+        // La canción empieza en el segundo 50
+        const START_TIME = 50;
+        let repeatOn = true;
+        let startApplied = false;
+
+        function goToStart() {
+            if (audio.duration && audio.duration > START_TIME) {
+                audio.currentTime = START_TIME;
+            } else {
+                audio.currentTime = 0;
+            }
         }
 
-        // Siguiente: como solo hay una canción, la reinicia y la reproduce
+        // Al cargar la canción, colocarla en el segundo 50
+        audio.addEventListener('loadedmetadata', () => {
+            if (!startApplied) {
+                startApplied = true;
+                goToStart();
+            }
+        });
+
+        // Al terminar, si "repetir" está activo, vuelve a empezar en el segundo 50
+        audio.addEventListener('ended', () => {
+            if (repeatOn) {
+                goToStart();
+                audio.play().catch(() => {});
+            }
+        });
+
+        // Anterior: vuelve al segundo 50
+        function prevTrack() {
+            goToStart();
+        }
+
+        // Siguiente: como solo hay una canción, vuelve al segundo 50 y la reproduce
         function nextTrack() {
-            audio.currentTime = 0;
+            goToStart();
             audio.play().catch(() => {});
         }
 
@@ -328,8 +359,8 @@
         }
 
         function toggleRepeat() {
-            audio.loop = !audio.loop;
-            repeatBtn.classList.toggle('is-off', !audio.loop);
+            repeatOn = !repeatOn;
+            repeatBtn.classList.toggle('is-off', !repeatOn);
         }
 
         function formatTime(seconds) {
