@@ -21,7 +21,7 @@
     <meta name="twitter:description" content="Mis xv años Fernanda 💙">
     <meta name="twitter:image" content="https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fregina1503%2Fmis-xv-fernanda%40main%2Fportada%2520%282%29.jpg&amp;w=1200&amp;q=80&amp;output=jpg">
     <link rel="preconnect" href="https://wsrv.nl">
-    <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fregina1503%2Fmis-xv-fernanda%40main%2FAgregar%2520algo%2520de%2520texto%2520%2811%29.jpg&amp;w=1080&amp;q=80&amp;output=webp" fetchpriority="high">
+    <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fregina1503%2Fmis-xv-fernanda%40main%2FAgregar%2520algo%2520de%2520texto%2520%281%29.jpg&amp;w=1080&amp;q=80&amp;output=webp" fetchpriority="high">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -114,9 +114,9 @@
 
         <!-- PÁGINA 1 -->
         <section id="section-0" class="page relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black">
-            <div class="absolute inset-0 bg-cover bg-center blur-3xl opacity-35 scale-110" style="background-image: url('https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fregina1503%2Fmis-xv-fernanda%40main%2FAgregar%2520algo%2520de%2520texto%2520%2811%29.jpg&w=60&q=50&output=webp');"></div>
+            <div class="absolute inset-0 bg-cover bg-center blur-3xl opacity-35 scale-110" style="background-image: url('https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fregina1503%2Fmis-xv-fernanda%40main%2FAgregar%2520algo%2520de%2520texto%2520%281%29.jpg&w=60&q=50&output=webp');"></div>
             <div class="relative z-10 w-full max-w-[520px] mx-auto">
-                <img src="https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fregina1503%2Fmis-xv-fernanda%40main%2FAgregar%2520algo%2520de%2520texto%2520%2811%29.jpg&amp;w=1080&amp;q=80&amp;output=webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/regina1503/mis-xv-fernanda@main/Agregar%20algo%20de%20texto%20(11).jpg'" alt="Página 1" loading="eager" fetchpriority="high" decoding="async" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
+                <img src="https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fregina1503%2Fmis-xv-fernanda%40main%2FAgregar%2520algo%2520de%2520texto%2520%281%29.jpg&amp;w=1080&amp;q=80&amp;output=webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/regina1503/mis-xv-fernanda@main/Agregar%20algo%20de%20texto%20(1).jpg'" alt="Página 1" loading="eager" fetchpriority="high" decoding="async" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
             </div>
         </section>
 
@@ -223,6 +223,44 @@
             <div class="absolute inset-0 bg-cover bg-center blur-3xl opacity-35 scale-110" style="background-image: url('https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fregina1503%2Fmis-xv-fernanda%40main%2FAgregar%2520algo%2520de%2520texto%2520%286%29.jpg&w=60&q=50&output=webp');"></div>
             <div class="relative z-10 w-full max-w-[520px] mx-auto">
                 <img src="https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fregina1503%2Fmis-xv-fernanda%40main%2FAgregar%2520algo%2520de%2520texto%2520%286%29.jpg&amp;w=1080&amp;q=80&amp;output=webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/regina1503/mis-xv-fernanda@main/Agregar%20algo%20de%20texto%20(6).jpg'" alt="Página 7" loading="lazy" decoding="async" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
+
+                <!-- Buscador de pases y confirmación -->
+                <div id="pase-card" class="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[82%] max-w-[340px] text-center text-white px-5 py-6 rounded-2xl border border-white/70 bg-black/40 backdrop-blur-sm shadow-2xl">
+
+                    <!-- Paso 1: buscar -->
+                    <div id="paso-buscar">
+                        <p class="font-serif-title text-[11px] tracking-[0.3em] uppercase">Busca tu pase</p>
+                        <p class="text-[11px] mt-1 opacity-90">Escribe tu nombre como aparece en la invitación</p>
+                        <div class="relative mt-3">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-black/50 text-xs"></i>
+                            <input id="buscar-input" type="text" autocomplete="off" placeholder="Ej. Itzel Salazar"
+                                class="select-text w-full rounded-full bg-white text-black text-sm pl-8 pr-3 py-2.5 outline-none placeholder:text-black/40">
+                        </div>
+                        <ul id="buscar-resultados" class="mt-2 text-left max-h-44 overflow-y-auto rounded-xl"></ul>
+                        <p id="buscar-vacio" class="hidden text-[11px] mt-2 opacity-90">No encontramos ese nombre. Revisa cómo lo escribiste o contacta a la familia.</p>
+                    </div>
+
+                    <!-- Paso 2: ver pase y confirmar -->
+                    <div id="paso-pase" class="hidden">
+                        <p class="font-serif-title text-[11px] tracking-[0.3em] uppercase">Pase para</p>
+                        <p id="pase-nombre" class="font-script text-4xl leading-tight mt-2"></p>
+                        <div class="w-16 h-px bg-white/70 mx-auto my-3"></div>
+                        <p class="text-[11px] uppercase tracking-widest">Hemos reservado</p>
+                        <p id="pase-numero" class="font-serif-title text-5xl font-semibold my-1"></p>
+                        <p id="pase-texto" class="text-[11px] uppercase tracking-widest"></p>
+                        <p id="pase-detalle" class="hidden mt-2 text-xs font-medium"></p>
+
+                        <div class="mt-4 flex items-center justify-center gap-2 text-xs">
+                            <label for="pase-asistentes">Asistiremos:</label>
+                            <select id="pase-asistentes" class="rounded-full bg-white text-black px-3 py-1.5 text-sm outline-none"></select>
+                        </div>
+                        <button onclick="confirmarAsistencia()" class="mt-3 w-full bg-white text-black font-medium rounded-full py-2.5 text-sm flex items-center justify-center gap-2 transition-transform active:scale-95">
+                            <i class="fa-brands fa-whatsapp text-green-600 text-base"></i> Confirmar asistencia
+                        </button>
+                        <button onclick="noAsistire()" class="mt-2 text-[11px] underline opacity-90">No podré asistir</button>
+                        <button onclick="volverABuscar()" class="block mx-auto mt-2 text-[11px] opacity-75">← Buscar otro nombre</button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -388,6 +426,134 @@
                 updateProgressUI();
             }
         });
+
+        // ===== Pases de invitados =====
+        // Para agregar o cambiar: "clave-del-enlace": { nombre, pases, detalle (opcional) }
+        const INVITADOS = {
+            "noel-desales":        { nombre: "Noel Desales", pases: 2 },
+            "carlos-alvarez":      { nombre: "Carlos Álvarez", pases: 3 },
+            "arturo-enriquez":     { nombre: "Arturo Enríquez", pases: 4 },
+            "joaquin-alvarez":     { nombre: "Joaquín Álvarez", pases: 2 },
+            "enrique-moreno":      { nombre: "Enrique Moreno", pases: 3 },
+            "gerardo-moreno":      { nombre: "Gerardo Moreno", pases: 4 },
+            "jose-guadalupe-mejia":{ nombre: "José Guadalupe Mejía", pases: 4 },
+            "genoveva-bermudez":   { nombre: "Genoveva Bermúdez", pases: 3 },
+            "andres-diaz":         { nombre: "Andrés Díaz", pases: 2 },
+            "carlos-carrillo":     { nombre: "Carlos Carrillo", pases: 2 },
+            "julian-miranda":      { nombre: "Julián Miranda", pases: 2 },
+            "eduardo-medina":      { nombre: "Eduardo Medina", pases: 3 },
+            "gerardo-miranda":     { nombre: "Gerardo Miranda", pases: 4 },
+            "efrain-miranda":      { nombre: "Efraín Miranda", pases: 3 },
+            "yazmin-miranda":      { nombre: "Yazmín Miranda", pases: 3 },
+            "emilio-munguia":      { nombre: "Emilio Munguía", pases: 2 },
+            "samuel-medrano":      { nombre: "Samuel Medrano", pases: 3 },
+            "laurencio-rebollar":  { nombre: "Laurencio Rebollar", pases: 2 },
+            "laura-sanchez":       { nombre: "Laura Sánchez", pases: 2 },
+            "sharon-ocampo":       { nombre: "Sharon Ocampo", pases: 2 },
+            "ulises-campuzano":    { nombre: "Ulises Campuzano", pases: 3 },
+            "juan-c-garcia":       { nombre: "Juan C. García", pases: 5 },
+            "itzel-miranda":       { nombre: "Itzel Miranda", pases: 7 },
+            "javier-miranda":      { nombre: "Javier Miranda", pases: 2 },
+            "aron-valdes":         { nombre: "Arón Valdés", pases: 4 },
+            "itzel-salazar":       { nombre: "Itzel Salazar", pases: 2, detalle: "1 adulto · 1 niño" },
+            "salvador-miranda":    { nombre: "Salvador Miranda", pases: 2 },
+            "jesus-a-arriaga":     { nombre: "Jesús A. Arriaga", pases: 6 },
+            "feliciano-miranda":   { nombre: "Feliciano Miranda", pases: 5 },
+            "diana":               { nombre: "Diana", pases: 1 },
+            "soledad":             { nombre: "Soledad", pases: 1 },
+            "victoria":            { nombre: "Victoria", pases: 1 },
+            "vanesa":              { nombre: "Vanesa", pases: 1 },
+            "alexa":               { nombre: "Alexa", pases: 1 },
+            "ivana":               { nombre: "Ivana", pases: 1 },
+            "sofia":               { nombre: "Sofía", pases: 1 },
+            "emanuel":             { nombre: "Emanuel", pases: 1 },
+            "max":                 { nombre: "Max", pases: 1 }
+        };
+
+        // Número de WhatsApp que recibe las confirmaciones (con 52 de México, sin espacios ni +)
+        const WHATSAPP_CONFIRMACION = "527228216818";
+
+        const buscarInput = document.getElementById('buscar-input');
+        const buscarResultados = document.getElementById('buscar-resultados');
+        const buscarVacio = document.getElementById('buscar-vacio');
+        let invitadoActual = null;
+
+        // Quita acentos y mayúsculas para que "joaquin" encuentre "Joaquín"
+        const normalizar = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\./g, '').trim();
+
+        buscarInput.addEventListener('input', () => {
+            const q = normalizar(buscarInput.value);
+            buscarResultados.innerHTML = '';
+            buscarVacio.classList.add('hidden');
+            if (q.length < 2) return;
+            const palabras = q.split(/\s+/);
+            const encontrados = Object.entries(INVITADOS)
+                .filter(([, inv]) => palabras.every(p => normalizar(inv.nombre).includes(p)))
+                .slice(0, 6);
+            if (!encontrados.length) { buscarVacio.classList.remove('hidden'); return; }
+            encontrados.forEach(([clave, inv]) => {
+                const li = document.createElement('li');
+                li.innerHTML = '<button class="w-full text-left px-4 py-2.5 text-sm bg-white/90 text-black border-b border-black/10 active:bg-white"></button>';
+                li.firstChild.textContent = inv.nombre;
+                li.firstChild.addEventListener('click', () => mostrarPase(clave));
+                buscarResultados.appendChild(li);
+            });
+        });
+
+        function mostrarPase(clave) {
+            const inv = INVITADOS[clave];
+            if (!inv) return;
+            invitadoActual = inv;
+            document.getElementById('pase-nombre').textContent = inv.nombre;
+            document.getElementById('pase-numero').textContent = inv.pases;
+            document.getElementById('pase-texto').textContent = inv.pases === 1 ? 'lugar en tu honor' : 'lugares en tu honor';
+            const d = document.getElementById('pase-detalle');
+            d.textContent = inv.detalle || '';
+            d.classList.toggle('hidden', !inv.detalle);
+
+            // Solo se puede confirmar hasta el número de pases asignado, no más
+            const sel = document.getElementById('pase-asistentes');
+            sel.innerHTML = '';
+            for (let i = inv.pases; i >= 1; i--) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = i + (i === 1 ? ' persona' : ' personas');
+                sel.appendChild(opt);
+            }
+
+            document.getElementById('paso-buscar').classList.add('hidden');
+            document.getElementById('paso-pase').classList.remove('hidden');
+        }
+
+        function volverABuscar() {
+            invitadoActual = null;
+            buscarInput.value = '';
+            buscarResultados.innerHTML = '';
+            buscarVacio.classList.add('hidden');
+            document.getElementById('paso-pase').classList.add('hidden');
+            document.getElementById('paso-buscar').classList.remove('hidden');
+        }
+
+        function enviarWhatsApp(mensaje) {
+            window.open('https://wa.me/' + WHATSAPP_CONFIRMACION + '?text=' + encodeURIComponent(mensaje), '_blank');
+        }
+
+        function confirmarAsistencia() {
+            if (!invitadoActual) return;
+            const n = Math.min(parseInt(document.getElementById('pase-asistentes').value, 10), invitadoActual.pases);
+            enviarWhatsApp(`¡Hola! Confirmo mi asistencia a los XV años de Fernanda 💙\nNombre: ${invitadoActual.nombre}\nAsistiremos: ${n} de ${invitadoActual.pases} ${invitadoActual.pases === 1 ? 'pase' : 'pases'}`);
+        }
+
+        function noAsistire() {
+            if (!invitadoActual) return;
+            enviarWhatsApp(`Hola, lamentablemente no podré asistir a los XV años de Fernanda.\nNombre: ${invitadoActual.nombre}`);
+        }
+
+        // Si alguien abre un enlace con ?invitado=..., se muestra su pase directo
+        (function () {
+            const clave = (new URLSearchParams(location.search).get('invitado') || '').toLowerCase().trim();
+            if (INVITADOS[clave]) mostrarPase(clave);
+        })();
 
         // ===== Cuenta regresiva al 24 de Octubre a las 5:00 PM =====
         const targetDate = new Date('October 24, 2026 17:00:00').getTime();
