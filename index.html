@@ -225,7 +225,7 @@
                 <img src="https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fregina1503%2Fmis-xv-fernanda%40main%2FAgregar%2520algo%2520de%2520texto%2520%286%29.jpg&amp;w=1080&amp;q=80&amp;output=webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/regina1503/mis-xv-fernanda@main/Agregar%20algo%20de%20texto%20(6).jpg'" alt="Página 7" loading="lazy" decoding="async" class="block w-full h-auto pointer-events-none drop-shadow-2xl" />
 
                 <!-- Buscador de pases y confirmación -->
-                <div id="pase-card" class="absolute z-30 top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[82%] max-w-[340px] text-center text-[#1e3a8a] px-5 py-6">
+                <div id="pase-card" class="absolute z-30 top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[82%] max-w-[340px] text-center text-[#1e3a8a] px-5 py-6">
 
                     <!-- Paso 1: buscar -->
                     <div id="paso-buscar">
@@ -250,15 +250,34 @@
                         <p id="pase-texto" class="text-[11px] uppercase tracking-widest"></p>
                         <p id="pase-detalle" class="hidden mt-2 text-xs font-medium"></p>
 
-                        <div class="mt-4 flex items-center justify-center gap-2 text-xs">
+                        <button onclick="irAPaso('paso-asistencia')" class="mt-4 w-full bg-[#1e3a8a] text-white font-medium rounded-full py-2.5 text-sm transition-transform active:scale-95">Continuar</button>
+                        <button onclick="volverABuscar()" class="block mx-auto mt-2 text-[11px] opacity-75">← Buscar otro nombre</button>
+                    </div>
+
+                    <!-- Paso 3: ¿asistirá? -->
+                    <div id="paso-asistencia" class="hidden">
+                        <p class="font-serif-title text-[11px] tracking-[0.3em] uppercase">Confirmación</p>
+                        <p class="font-script text-4xl leading-tight mt-2">¿Nos acompañas?</p>
+                        <div class="w-16 h-px bg-[#1e3a8a] mx-auto my-3"></div>
+                        <button onclick="elegirAsistencia(true)" class="w-full bg-[#1e3a8a] text-white font-medium rounded-full py-2.5 text-sm transition-transform active:scale-95">Sí, asistiré</button>
+                        <button onclick="elegirAsistencia(false)" class="mt-2 w-full bg-white text-[#1e3a8a] border-2 border-[#1e3a8a] font-medium rounded-full py-2 text-sm transition-transform active:scale-95">No podré asistir</button>
+                        <button onclick="irAPaso('paso-pase')" class="block mx-auto mt-3 text-[11px] opacity-75">← Regresar</button>
+                    </div>
+
+                    <!-- Paso 4: enviar confirmación -->
+                    <div id="paso-enviar" class="hidden">
+                        <p class="font-serif-title text-[11px] tracking-[0.3em] uppercase">Último paso</p>
+                        <p id="enviar-titulo" class="font-script text-4xl leading-tight mt-2"></p>
+                        <div class="w-16 h-px bg-[#1e3a8a] mx-auto my-3"></div>
+                        <div id="enviar-si" class="flex items-center justify-center gap-2 text-xs">
                             <label for="pase-asistentes">Asistiremos:</label>
                             <select id="pase-asistentes" class="rounded-full bg-white text-[#1e3a8a] border-2 border-[#1e3a8a] px-3 py-1.5 text-sm outline-none"></select>
                         </div>
-                        <button onclick="confirmarAsistencia()" class="mt-3 w-full bg-[#1e3a8a] text-white font-medium rounded-full py-2.5 text-sm flex items-center justify-center gap-2 transition-transform active:scale-95">
-                            <i class="fa-brands fa-whatsapp text-white text-base"></i> Confirmar asistencia
+                        <p id="enviar-no" class="hidden text-xs">Te extrañaremos. Avísanos por WhatsApp.</p>
+                        <button onclick="enviarRespuesta()" class="mt-4 w-full bg-[#1e3a8a] text-white font-medium rounded-full py-2.5 text-sm flex items-center justify-center gap-2 transition-transform active:scale-95">
+                            <i class="fa-brands fa-whatsapp text-white text-base"></i> Enviar confirmación
                         </button>
-                        <button onclick="noAsistire()" class="mt-2 text-[11px] underline opacity-90">No podré asistir</button>
-                        <button onclick="volverABuscar()" class="block mx-auto mt-2 text-[11px] opacity-75">← Buscar otro nombre</button>
+                        <button onclick="irAPaso('paso-asistencia')" class="block mx-auto mt-3 text-[11px] opacity-75">← Regresar</button>
                     </div>
                 </div>
             </div>
@@ -529,8 +548,15 @@
                 sel.appendChild(opt);
             }
 
-            document.getElementById('paso-buscar').classList.add('hidden');
-            document.getElementById('paso-pase').classList.remove('hidden');
+            irAPaso('paso-pase');
+        }
+
+        // Muestra solo un paso a la vez: buscar → pase → ¿asistirá? → enviar
+        const PASOS = ['paso-buscar', 'paso-pase', 'paso-asistencia', 'paso-enviar'];
+        let asistira = true;
+
+        function irAPaso(id) {
+            PASOS.forEach(p => document.getElementById(p).classList.toggle('hidden', p !== id));
         }
 
         function volverABuscar() {
@@ -538,23 +564,29 @@
             buscarInput.value = '';
             buscarResultados.innerHTML = '';
             buscarVacio.classList.add('hidden');
-            document.getElementById('paso-pase').classList.add('hidden');
-            document.getElementById('paso-buscar').classList.remove('hidden');
+            irAPaso('paso-buscar');
+        }
+
+        function elegirAsistencia(si) {
+            asistira = si;
+            document.getElementById('enviar-titulo').textContent = si ? '¡Qué alegría!' : 'Lo sentimos';
+            document.getElementById('enviar-si').classList.toggle('hidden', !si);
+            document.getElementById('enviar-no').classList.toggle('hidden', si);
+            irAPaso('paso-enviar');
         }
 
         function enviarWhatsApp(mensaje) {
             window.open('https://wa.me/' + WHATSAPP_CONFIRMACION + '?text=' + encodeURIComponent(mensaje), '_blank');
         }
 
-        function confirmarAsistencia() {
+        function enviarRespuesta() {
             if (!invitadoActual) return;
-            const n = Math.min(parseInt(document.getElementById('pase-asistentes').value, 10), invitadoActual.pases);
-            enviarWhatsApp(`¡Hola! Confirmo mi asistencia a los XV años de Fernanda 💙\nNombre: ${invitadoActual.nombre}\nAsistiremos: ${n} de ${invitadoActual.pases} ${invitadoActual.pases === 1 ? 'pase' : 'pases'}`);
-        }
-
-        function noAsistire() {
-            if (!invitadoActual) return;
-            enviarWhatsApp(`Hola, lamentablemente no podré asistir a los XV años de Fernanda.\nNombre: ${invitadoActual.nombre}`);
+            if (asistira) {
+                const n = Math.min(parseInt(document.getElementById('pase-asistentes').value, 10), invitadoActual.pases);
+                enviarWhatsApp(`¡Hola! Confirmo mi asistencia a los XV años de Fernanda 💙\nNombre: ${invitadoActual.nombre}\nAsistiremos: ${n} de ${invitadoActual.pases} ${invitadoActual.pases === 1 ? 'pase' : 'pases'}`);
+            } else {
+                enviarWhatsApp(`Hola, lamentablemente no podré asistir a los XV años de Fernanda.\nNombre: ${invitadoActual.nombre}`);
+            }
         }
 
         // Si alguien abre un enlace con ?invitado=..., se muestra su pase directo
